@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-whiteboard',
+  selector: 'whiteboard',
   templateUrl: './whiteboard.component.html',
   styleUrls: ['./whiteboard.component.css']
 })
@@ -11,5 +11,7 @@ export class WhiteboardComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
 }

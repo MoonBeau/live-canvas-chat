@@ -1,2 +1,18 @@
-<input type="text" placeholder="Enter Message..." [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()">
+<div class="row">
+  <label>Username</label>
+  <input type="text" [(ngModel)]="username" name="username" class="form-control">
+  <br>
+</div>
+
+<h1 class="text-center">Welcome to Live Canvas Chat</h1>
+
+<div *ngIf="username">
+<input class="form-control" (keyup.enter)="sendMessage()" [(ngModel)]="message" name="message" type="text" placeholder="Enter message">
 <br>
+<div *ngFor="let message of messages">
+  <div class="well"><strong>{{message.username}}:</strong>{{message.text}}</div>
+
+</div>
+</div>
+
+<div *ngIf="!username" class="text-center">Please login!</div>

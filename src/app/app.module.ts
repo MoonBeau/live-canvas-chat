@@ -23,10 +23,14 @@ import { ChatService } from './services/chat.service';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {
+    {
       path: 'chat',
       component: ChatComponent
-      }
+    },
+    {
+      path: 'whiteboard',
+      component: WhiteboardComponent
+    }
     ])
   ],
   providers: [ChatService],
