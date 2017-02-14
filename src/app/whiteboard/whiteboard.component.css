@@ -5,13 +5,7 @@ canvas {
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
-body {
-  margin: 0;
-  padding: 30px;
-  background:#00476B;
-  color:white;
-  font-family:'Patrick Hand',cursive ;
-}
+
 
 button,
 a {
@@ -35,7 +29,7 @@ a {
   display:inline-block;
   vertical-align:middle;
   font-size:20px;
-  color: ghostwhite;
+  color: black;
   box-sizing:border-box;
   background:rgb(240,240,240)
 }
