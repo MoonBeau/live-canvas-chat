@@ -38,9 +38,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.message = '';
   }
 
-  setUsername(){
-    this.chatService.setUsername(this.username)
-    this.alert = 'Username is set'
+  setUsername() {
+    this._chatService.setUsername(this.username);
+    this.alert = 'Username is set';
   }
 
 }

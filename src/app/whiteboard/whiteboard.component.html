@@ -1,1 +1,13 @@
-<canvas id = "canvas" onmousedown = "s = 1; ctx.beginPath(); ctx.moveTo(x, y);" onmousemove = "getXY(event);" onmouseup = "s = 0;" onmouseout = "s = 0;" width = "750" height = "500"></canvas>
+<div>
+     <canvas #myCanvas width="1100" height="600" style="background:ghostwhite;"></canvas>
+     <div>
+       <button style="background:#50fa7b" (click)="Restore()">Undo</button>
+       <button style="background:#ff5555" (click)="Clear()">Clear</button>
+       <a style="background:#f1fa8c" (click)="Save($event)">Download</a>
+       <br>
+       <input type="color" [(ngModel)]="strokeColor" style="height:35px" placeholder=" Other colours" value="{{strokeColor}}">
+       <br>
+       <input type="range" min="1" max="100" [(ngModel)]="strokeWidth" />
+       <br>
+     </div>
+</div>
