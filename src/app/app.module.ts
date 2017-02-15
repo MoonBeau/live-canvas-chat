@@ -11,6 +11,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 
 import { ChatService } from './services/chat.service';
 import { WindowRef } from './services/window-ref.service';
+import { WhiteboardService } from './services/whiteboard.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { WindowRef } from './services/window-ref.service';
     }
     ])
   ],
-  providers: [ChatService, WindowRef],
+  providers: [ChatService, WindowRef, WhiteboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

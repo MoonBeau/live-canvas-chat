@@ -1,4 +1,5 @@
 import { Component, ViewChild, AfterViewInit, ElementRef, OnDestroy, HostListener } from '@angular/core';
+import { WhiteboardService } from '../services/whiteboard.service';
 
 
 
@@ -7,11 +8,11 @@ import { Component, ViewChild, AfterViewInit, ElementRef, OnDestroy, HostListene
   templateUrl: './whiteboard.component.html',
   styleUrls: ['./whiteboard.component.css']
 })
-export class WhiteboardComponent implements AfterViewInit {
+export class WhiteboardComponent implements AfterViewInit, OnDestroy {
 isDrawing: boolean;
+ctx: CanvasRenderingContext2D;
 // ctx.fillStyle = '#ff5555';
 // ctx.fillRect(0, 0, ctx.width, ctx.height);
-ctx: CanvasRenderingContext2D;
 // myCanvas.width:  number = win.innerWidth - 60;
 // myCanvas.height: number = win.innerHeight * 0.6;
 restore = new Array();
@@ -20,15 +21,17 @@ strokeColor = '#282a36';
 strokeWidth: number;
 innerWidth: number;
 innerHeight: number;
+data;
+connection: any;
+fill;
+noStroke;
+ellipse;
+
 
 
 @ViewChild('myCanvas') myCanvas: ElementRef;
 
-    constructor() {
-      // let win = winRef.nativeWindow;
-      // let getWindow = () => {
-      //   return window.innerWidth;
-      // };
+    constructor(private _whiteboardService: WhiteboardService) {
     }
 // @HostListener('window:resize', ['$event'])
     // onResize(e) {
@@ -66,6 +69,13 @@ innerHeight: number;
   this.stop(e);
 }
     ngAfterViewInit() {
+      this.connection = this._whiteboardService.getDrawings()
+      .subscribe(
+        data => {
+          this.reDraw(data);
+
+        }
+      );
        this.ctx = this.myCanvas.nativeElement.getContext('2d');
       // console.log('Window Object', this.winRef.nativeWindow);
       this.brush();
@@ -91,13 +101,13 @@ innerHeight: number;
           this.ctx.lineTo(this.getX(e), this.getY(e));
           this.brush();
           this.ctx.stroke();
-          console.log('Your Drawing');
+          this.sendDrawings(e.x, e.y);
+          console.log('Youre Drawing');
           }
           e.preventDefault();
         }
 
         stop(e) {
-          console.log(this.isDrawing);
           if (this.isDrawing === true) {
           this.ctx.stroke();
           this.ctx.closePath();
@@ -124,8 +134,24 @@ innerHeight: number;
           return e.pageY - e.target.offsetTop;
         }
       }
+      sendDrawings(xpos, ypos) {
+        let data = {
+          x: xpos,
+          y: ypos
+        };
+        console.log(data);
+        this._whiteboardService.sendDrawings(data);
+      }
 
-
+      reDraw(d) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(d.x, d.y);
+        this.ctx.lineTo(d.x, d.y);
+        this.brush();
+        this.ctx.stroke();
+        this.ctx.stroke();
+        this.ctx.closePath();
+      }
 
       //  Restore() {
       //    if (this.resloc <= 0) {
@@ -154,10 +180,12 @@ innerHeight: number;
       // }
 
     // ngAfterViewChecked() {
-    //
+        // render(){
+        //
+        // }
     // }
  ngOnDestroy() {
-
+   this.connection.unsubscribe();
  }
 
 }

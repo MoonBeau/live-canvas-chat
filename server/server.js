@@ -16,13 +16,10 @@ io.on('connection', (socket) => {
     });
     console.log('Message sent...');
   });
-  socket.on('drawClick', (data) => {
-      socket.broadcast.emit('draw', {
-        x: data.x,
-        y: data.y,
-        type: data.type
-      });
-      console.log('Drawing transmitting...');
+  socket.on('mouseClick', (data) => {
+      console.log('Received: "mouseClick" ' + data.x + ',' + data.y);
+      socket.broadcast.emit('mouseClick', data);
+      console.log('Drawing transmitted...');
   });
 
 });
