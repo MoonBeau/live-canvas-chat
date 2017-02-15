@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { WhiteboardComponent } from './whiteboard/whiteboard.component';
@@ -21,6 +22,7 @@ import { WhiteboardService } from './services/whiteboard.service';
     GalleryComponent
   ],
   imports: [
+    MaterialModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -32,6 +34,10 @@ import { WhiteboardService } from './services/whiteboard.service';
     {
       path: 'whiteboard',
       component: WhiteboardComponent
+    },
+    {
+      path: 'gallery',
+      component: GalleryComponent
     }
     ])
   ],

@@ -73,7 +73,6 @@ ellipse;
       .subscribe(
         data => {
           this.reDraw(data);
-
         }
       );
        this.ctx = this.myCanvas.nativeElement.getContext('2d');

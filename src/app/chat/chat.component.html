@@ -1,8 +1,6 @@
-<div class="row">
-  <label>Username</label>
-  <input type="text" [(ngModel)]="username" name="username" class="form-control">
-  <br>
-</div>
+<md-input-container>
+  <input md-input placeholder="Username" type="text" (keyup.enter)="username" [(ngModel)]="username" name="username" class="form-control">
+</md-input-container>
 
 <h1 class="text-center">Welcome to Live Canvas Chat</h1>
 
