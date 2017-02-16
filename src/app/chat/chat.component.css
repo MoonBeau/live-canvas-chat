@@ -1,0 +1,9 @@
+.textline {
+  width: auto;
+}
+
+md-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { ChatService } from '../services/chat.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'chat',
@@ -15,12 +15,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   alert: any = false;
 
   constructor(
-    private _chatService: ChatService
+    private _socketService: SocketService
   ) { }
 
 
   ngOnInit() {
-    this.connection = this._chatService.getMessages()
+    this.connection = this._socketService.getMessages()
     .subscribe(
       message => {
         console.log(message);
@@ -34,12 +34,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    this._chatService.sendMessage(this.message, this.username);
+    this._socketService.sendMessage(this.message, this.username);
     this.message = '';
   }
 
   setUsername() {
-    this._chatService.setUsername(this.username);
+    this._socketService.setUsername(this.username);
     this.alert = 'Username is set';
   }
 

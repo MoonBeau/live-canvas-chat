@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit, ElementRef, OnDestroy, HostListener } from '@angular/core';
-import { WhiteboardService } from '../services/whiteboard.service';
+import { SocketService } from '../services/socket.service';
 
 
 
@@ -18,7 +18,7 @@ ctx: CanvasRenderingContext2D;
 restore = new Array();
 resloc = -1;
 strokeColor = '#282a36';
-strokeWidth: number;
+strokeWidth = 2;
 innerWidth: number;
 innerHeight: number;
 data;
@@ -31,15 +31,13 @@ ellipse;
 
 @ViewChild('myCanvas') myCanvas: ElementRef;
 
-    constructor(private _whiteboardService: WhiteboardService) {
+    constructor(private _socketService: SocketService) {
     }
-// @HostListener('window:resize', ['$event'])
-    // onResize(e) {
-    // this.width = window.innerWidth - 60;
-    // this.height = window.innerHeight * 0.6;
-    // this.render();
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+      event.target.innerWidth;
+    }
 
-// }
 @HostListener('touchstart', ['$event']) touchStart(e) {
   // this.isDrawing = false;
   this.start(e);
@@ -68,8 +66,10 @@ ellipse;
   // this.isDrawing = false;
   this.stop(e);
 }
+
+
     ngAfterViewInit() {
-      this.connection = this._whiteboardService.getDrawings()
+      this.connection = this._socketService.getDrawings()
       .subscribe(
         data => {
           this.reDraw(data);
@@ -113,8 +113,8 @@ ellipse;
           this.isDrawing = false;
           }
           e.preventDefault();
-          // this.restore.push(this.ctx.getImageData(0, 0, this.myCanvas.width, this.myCanvas.height));
-          // this.resloc += 1;
+          this.restore.push(e.getImageData(0, 0, e.width, e.height));
+          this.resloc += 1;
           console.log('Stopped');
         }
 
@@ -139,7 +139,7 @@ ellipse;
           y: ypos
         };
         console.log(data);
-        this._whiteboardService.sendDrawings(data);
+        this._socketService.sendDrawings(data);
       }
 
       reDraw(d) {
@@ -152,31 +152,31 @@ ellipse;
         this.ctx.closePath();
       }
 
-      //  Restore() {
-      //    if (this.resloc <= 0) {
-      //      this.Clear();
-      // } else {
-      //      this.resloc += -1;
-      //      this.restore.pop();
-      //      this.ctx.putImageData(this.restore[this.resloc], 0, 0);
-      //    }
-      //  }
+       Restore() {
+         if (this.resloc <= 0) {
+           Clear();
+      } else {
+           this.resloc += -1;
+           this.restore.pop();
+           this.ctx.putImageData(this.restore[this.resloc], 0, 0);
+         }
+       }
       //
       //  Save(a) {
       // let img = this.myCanvas.toDataURL('image/png');
       //    a.href = img;
       //  }
       //
-      //  Clear() {
-      //    let confirmClear = confirm('Are you sure you would like to clear your canvas? This cannot be undone.');
-      // if (confirmClear === true) {
-      //      this.ctx.fillStyle = '#fff';
-      //      this.ctx.clearRect(0, 0, this.myCanvas.width, this.myCanvas.height);
-      //      this.ctx.fillRect(0, 0, this.myCanvas.width, this.myCanvas.height);
-      //      this.restore = new Array();
-      //      this.resloc = -1;
-      //    } else {}
-      // }
+       Clear(e) {
+         let confirmClear = confirm('Are you sure you would like to clear your canvas? This cannot be undone.');
+      if (confirmClear === true) {
+           this.ctx.fillStyle = '#fff';
+           this.ctx.clearRect(0, 0, e.width, e.height);
+           this.ctx.fillRect(0, 0, e.width, e.height);
+           this.restore = new Array();
+           this.resloc = -1;
+         } else {}
+      }
 
     // ngAfterViewChecked() {
         // render(){

@@ -1,5 +1,7 @@
-
-     <canvas #myCanvas width="1100" height="600" style="background:ghostwhite;"></canvas>
+      <md-card class="boxer">
+     <canvas #myCanvas width="600" height="600" style="background:ghostwhite;"></canvas>
+     <md-card><chat></chat></md-card>
+   </md-card>
      <div>
        <button style="background:#50fa7b" (click)="Restore()">Undo</button>
        <button style="background:#ff5555" (click)="Clear()">Clear</button>
@@ -7,7 +9,7 @@
        <br>
        <input type="color" [(ngModel)]="strokeColor" style="height:35px" placeholder=" Other colours" value="{{strokeColor}}" />
        <br>
-       <input type="range" min="2" max="100" [(ngModel)]="strokeWidth" name="strokeWidth" value="{{strokeWidth}}"/>
+       <input type="range" min="1" max="100" [(ngModel)]="this.strokeWidth" name="strokeWidth" value="{{this.strokeWidth}}"/>
        <br>
        <input type="range" min='1' max='100' name="">
      </div>

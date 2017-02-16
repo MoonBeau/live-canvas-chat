@@ -10,9 +10,8 @@ import { WhiteboardComponent } from './whiteboard/whiteboard.component';
 import { ChatComponent } from './chat/chat.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
-import { ChatService } from './services/chat.service';
-import { WindowRef } from './services/window-ref.service';
-import { WhiteboardService } from './services/whiteboard.service';
+import { SocketService } from './services/socket.service';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +40,7 @@ import { WhiteboardService } from './services/whiteboard.service';
     }
     ])
   ],
-  providers: [ChatService, WindowRef, WhiteboardService],
+  providers: [SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

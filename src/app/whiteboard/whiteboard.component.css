@@ -1,4 +1,7 @@
-
+.boxer {
+  display: flex;
+  justify-content: space-around;
+}
 canvas {
   margin: 0px;
   box-sizing: border-box;

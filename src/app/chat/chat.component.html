@@ -1,16 +1,22 @@
+<md-card>
 <md-input-container>
   <input md-input placeholder="Username" type="text" (keyup.enter)="username" [(ngModel)]="username" name="username" class="form-control">
 </md-input-container>
 
-<h1 class="text-center">Welcome to Live Canvas Chat</h1>
+
 
 <div *ngIf="username">
-<input class="form-control" (keyup.enter)="sendMessage()" [(ngModel)]="message" name="message" type="text" placeholder="Enter message">
+<md-input-container>
+<input md-input class="form-control" (keyup.enter)="sendMessage()" [(ngModel)]="message" name="message" type="text" placeholder="Enter message">
+</md-input-container>
 <br>
 <div *ngFor="let message of messages">
-  <div class="well"><strong>{{message.username}}:</strong>{{message.text}}</div>
-
+  <md-card class="textline"><strong>{{message.username}}:</strong>{{message.text}}</md-card>
 </div>
 </div>
 
-<div *ngIf="!username" class="text-center">Please login!</div>
+<div *ngIf="!username" class="text-center">
+  <h1 class="text-center">Welcome to Live Canvas Chat</h1>
+  Please login!
+</div>
+</md-card>
