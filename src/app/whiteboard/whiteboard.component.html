@@ -2,14 +2,14 @@
      <canvas #myCanvas width="600" height="600" style="background:ghostwhite;"></canvas>
      <md-card><chat></chat></md-card>
    </md-card>
-     <div>
-       <button style="background:#50fa7b" (click)="Restore()">Undo</button>
-       <button style="background:#ff5555" (click)="Clear()">Clear</button>
-       <a style="background:#f1fa8c" (click)="Save($event)">Download</a>
+
+
+     <md-card>
+       <!-- <button style="background:#50fa7b" (click)="Restore()">Undo</button>
+       <button style="background:#ff5555" (click)="Clear($event)">Clear</button> -->
        <br>
        <input type="color" [(ngModel)]="strokeColor" style="height:35px" placeholder=" Other colours" value="{{strokeColor}}" />
        <br>
-       <input type="range" min="1" max="100" [(ngModel)]="this.strokeWidth" name="strokeWidth" value="{{this.strokeWidth}}"/>
-       <br>
-       <input type="range" min='1' max='100' name="">
-     </div>
+       <input type="range" min="1" max="100" [(ngModel)]="strokeWidth" name="strokeWidth" />
+
+     </md-card>

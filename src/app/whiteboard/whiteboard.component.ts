@@ -33,10 +33,11 @@ ellipse;
 
     constructor(private _socketService: SocketService) {
     }
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-      event.target.innerWidth;
-    }
+
+// @HostListener('window:resize', ['$event']) onResize(e) {
+//       // event.target.innerWidth;
+//       console.log(e);
+//     }
 
 @HostListener('touchstart', ['$event']) touchStart(e) {
   // this.isDrawing = false;
@@ -152,31 +153,31 @@ ellipse;
         this.ctx.closePath();
       }
 
-       Restore() {
-         if (this.resloc <= 0) {
-           Clear();
-      } else {
-           this.resloc += -1;
-           this.restore.pop();
-           this.ctx.putImageData(this.restore[this.resloc], 0, 0);
-         }
-       }
+      //  Restore() {
+      //    if (this.resloc <= 0) {
+      //      Clear();
+      // } else {
+      //      this.resloc += -1;
+      //      this.restore.pop();
+      //      this.ctx.putImageData(this.restore[this.resloc], 0, 0);
+      //    }
+      //  }
       //
       //  Save(a) {
       // let img = this.myCanvas.toDataURL('image/png');
       //    a.href = img;
       //  }
       //
-       Clear(e) {
-         let confirmClear = confirm('Are you sure you would like to clear your canvas? This cannot be undone.');
-      if (confirmClear === true) {
-           this.ctx.fillStyle = '#fff';
-           this.ctx.clearRect(0, 0, e.width, e.height);
-           this.ctx.fillRect(0, 0, e.width, e.height);
-           this.restore = new Array();
-           this.resloc = -1;
-         } else {}
-      }
+      //  Clear(e) {
+      //    let confirmClear = confirm('Are you sure you would like to clear your canvas? This cannot be undone.');
+      // if (confirmClear === true) {
+      //      this.ctx.fillStyle = '#fff';
+      //      this.ctx.clearRect(0, 0, e.width, e.height);
+      //      this.ctx.fillRect(0, 0, e.width, e.height);
+      //      this.restore = new Array();
+      //      this.resloc = -1;
+      //    } else {}
+      // }
 
     // ngAfterViewChecked() {
         // render(){
